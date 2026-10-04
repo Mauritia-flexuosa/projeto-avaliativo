@@ -59,11 +59,11 @@ O desenvolvimento seguiu o rigor estatístico necessário para evitar vazamento 
 * **Limpeza Inicial:** Identificamos e removemos 165 linhas duplicadas da base.
 * **Análise de Nulos e Outliers (Data Prep):** 
   * A variável `person_emp_length` possuía 887 dados nulos (2,73%) e discrepâncias graves (outliers impossíveis, como 123 anos de emprego). Transformamos valores acima de 35 anos em `NaN` e imputamos os valores nulos utilizando a **Mediana**, por ser menos sensível aos outliers restantes.
-  * A variável `loan_int_rate` apresentou 3.095 nulos (9,54%) e também presença de outliers. [Adicione aqui se usou média ou mediana para imputar esta taxa no seu código].
+  * A variável `loan_int_rate` apresentou 3.095 nulos (9,54%) e também presença de outliers. Agrupei `loan_int_rate` por `loan_grade` e preenchi com a mediana de cada grupo.
 * **Feature Engineering:** Criação da feature de `comprometimento_renda`, garantindo tratamento de nulos prévio.
 * **Reanálise da matriz de correlação com nova variável:** Notamos que a nova variável é redundante com `loan_percent_income`, sendo assim, mantivemos a nova variável e removemos a antiga. 
-* **Encoding e Split:** Conversão de variáveis categóricas usando [Preencha: One-Hot/Label Encoding] e separação de treino/teste com 20% e `stratify=y` para manter a proporção das classes desbalanceadas.
-* **Balanceamento:** Aplicação de [Preencha: SMOTE ou UnderSampling] estritamente nos dados de treino para evitar vazamento.
+* **Encoding e Split:** Conversão de variáveis categóricas usando One-Hot/Label Encoding e separação de treino/teste com 20% e `stratify=y` para manter a proporção das classes desbalanceadas.
+* **Balanceamento:** Aplicação de SMOTE e UnderSampling estritamente nos dados de treino para evitar vazamento.
 * **Escalonamento:** Uso de `StandardScaler` apenas para o modelo KNN. A Árvore de Decisão foi preservada sem escalonamento devido aos seus cortes monotônicos.
 
 ---
@@ -99,5 +99,5 @@ Recomenda-se colocar em produção o modelo **[KNN com k=9 e undersampling]**. E
 #### Clone este repositório:
 
    ```bash
-   git clone [https://github.com/SeuUsuario/SeuRepositorio.git](https://github.com/Mauritia-flexuosa/projeto-avaliativo.git)
+   git clone https://github.com/Mauritia-flexuosa/projeto-avaliativo.git
    ```
