@@ -12,7 +12,7 @@
 Este projeto desenvolve um pipeline preditivo completo focado em resolver um problema real de negócios no setor Financeiro (Risco de Crédito).
 
 **O Desafio:**  
-Um banco precisa prever se um cliente se tornará inadimplente (alvo: `loan_status = 1`) ou se pagará o empréstimo em dia (alvo: `loan_status = 0`)[cite: 1].
+Um banco precisa prever se um cliente se tornará inadimplente (alvo: `loan_status = 1`) ou se pagará o empréstimo em dia (alvo: `loan_status = 0`).
 
 **Impacto Financeiro (O Custo do Erro):**  
 Em nosso cenário, a Inteligência Artificial precisa ser avaliada sob a ótica financeira:
@@ -23,7 +23,7 @@ Em nosso cenário, a Inteligência Artificial precisa ser avaliada sob a ótica 
 
 ## 2. Dicionário de Dados
 
-A base de dados original conta com 32.581 unidades amostrais e 12 variáveis originais[cite: 1]. Durante a fase de *Feature Engineering*, foi criada a variável estratégica exigida para enriquecer a análise.
+A base de dados original conta com 32.581 unidades amostrais e 12 variáveis originais. Durante a fase de *Feature Engineering*, foi criada a variável estratégica exigida para enriquecer a análise.
 
 | Variável | Descrição | Tipo de Dado |
 | :--- | :--- | :--- |
@@ -46,9 +46,9 @@ A base de dados original conta com 32.581 unidades amostrais e 12 variáveis ori
 
 Durante a fase de exploração, extraímos diagnósticos cruciais que guiaram o tratamento e modelagem:
 
-1. **Desbalanceamento Crítico:** A base possui dados com forte assimetria na variável alvo. Cerca de 78,18% (25.473) são bons pagadores (Classe 0) e apenas cerca de 21,82% (7.108) são inadimplentes (Classe 1)[cite: 1].
-2. **Correlações Relevantes:** O mapa de calor indicou forte relação colinear (0,86) entre a idade do indivíduo (`person_age`) e seu histórico de crédito (`cb_person_cred_hist_length`)[cite: 1]. Para o nosso alvo, a maior correlação relativa numérica encontrada foi com a variável calculada/percentual de renda (`loan_percent_income` com 0,38)[cite: 1].
-3. **Padrões por Intenção de Empréstimo:** Observou-se que a intenção do empréstimo influencia na inadimplência, sendo que consolidação de débito, gastos médicos e melhorias residenciais possuem taxas relativas maiores de inadimplência (cerca de 26-28%)[cite: 1].
+1. **Desbalanceamento Crítico:** A base possui dados com forte assimetria na variável alvo. Cerca de 78,18% (25.473) são bons pagadores (Classe 0) e apenas cerca de 21,82% (7.108) são inadimplentes (Classe 1).
+2. **Correlações Relevantes:** O mapa de calor indicou forte relação colinear (0,86) entre a idade do indivíduo (`person_age`) e seu histórico de crédito (`cb_person_cred_hist_length`). Para o nosso alvo, a maior correlação relativa numérica encontrada foi com a variável calculada/percentual de renda (`loan_percent_income` com 0,38).
+3. **Padrões por Intenção de Empréstimo:** Observou-se que a intenção do empréstimo influencia na inadimplência, sendo que consolidação de débito, gastos médicos e melhorias residenciais possuem taxas relativas maiores de inadimplência (cerca de 26-28%).
 
 ---
 
@@ -56,10 +56,10 @@ Durante a fase de exploração, extraímos diagnósticos cruciais que guiaram o 
 
 O desenvolvimento seguiu o rigor estatístico necessário para evitar vazamento de dados (*Data Leakage*) e ruídos no aprendizado:
 
-* **Limpeza Inicial:** Identificamos e removemos 165 linhas duplicadas da base[cite: 1].
+* **Limpeza Inicial:** Identificamos e removemos 165 linhas duplicadas da base.
 * **Análise de Nulos e Outliers (Data Prep):** 
-  * A variável `person_emp_length` possuía 887 dados nulos (2,73%)[cite: 1] e discrepâncias graves (outliers impossíveis, como 123 anos de emprego)[cite: 1]. Transformamos valores acima de 35 anos em `NaN` e imputamos os valores nulos utilizando a **Mediana**[cite: 1], por ser menos sensível aos outliers restantes.
-  * A variável `loan_int_rate` apresentou 3.095 nulos (9,54%) e também presença de outliers[cite: 1]. [Adicione aqui se usou média ou mediana para imputar esta taxa no seu código].
+  * A variável `person_emp_length` possuía 887 dados nulos (2,73%) e discrepâncias graves (outliers impossíveis, como 123 anos de emprego). Transformamos valores acima de 35 anos em `NaN` e imputamos os valores nulos utilizando a **Mediana**, por ser menos sensível aos outliers restantes.
+  * A variável `loan_int_rate` apresentou 3.095 nulos (9,54%) e também presença de outliers. [Adicione aqui se usou média ou mediana para imputar esta taxa no seu código].
 * **Feature Engineering:** Criação da feature de `comprometimento_renda`, garantindo tratamento de nulos prévio.
 * **Encoding e Split:** Conversão de variáveis categóricas usando [Preencha: One-Hot/Label Encoding] e separação de treino/teste com 20% e `stratify=y` para manter a proporção das classes desbalanceadas.
 * **Balanceamento:** Aplicação de [Preencha: SMOTE ou UnderSampling] estritamente nos dados de treino para evitar vazamento.
