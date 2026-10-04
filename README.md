@@ -61,6 +61,7 @@ O desenvolvimento seguiu o rigor estatístico necessário para evitar vazamento 
   * A variável `person_emp_length` possuía 887 dados nulos (2,73%) e discrepâncias graves (outliers impossíveis, como 123 anos de emprego). Transformamos valores acima de 35 anos em `NaN` e imputamos os valores nulos utilizando a **Mediana**, por ser menos sensível aos outliers restantes.
   * A variável `loan_int_rate` apresentou 3.095 nulos (9,54%) e também presença de outliers. [Adicione aqui se usou média ou mediana para imputar esta taxa no seu código].
 * **Feature Engineering:** Criação da feature de `comprometimento_renda`, garantindo tratamento de nulos prévio.
+* **Reanálise da matriz de correlação com nova variável:** Notamos que a nova variável é redundante com `loan_percent_income`, sendo assim, mantivemos a nova variável e removemos a antiga. 
 * **Encoding e Split:** Conversão de variáveis categóricas usando [Preencha: One-Hot/Label Encoding] e separação de treino/teste com 20% e `stratify=y` para manter a proporção das classes desbalanceadas.
 * **Balanceamento:** Aplicação de [Preencha: SMOTE ou UnderSampling] estritamente nos dados de treino para evitar vazamento.
 * **Escalonamento:** Uso de `StandardScaler` apenas para o modelo KNN. A Árvore de Decisão foi preservada sem escalonamento devido aos seus cortes monotônicos.
@@ -84,7 +85,7 @@ Foram testados dois algoritmos clássicos, variando seus hiperparâmetros de com
 Sob a ótica de negócios para concessão de crédito, nossa prioridade é evitar **Falsos Negativos** (dar crédito a quem vai dar calote), o que sugere a importância da métrica de **Recall** para a classe 1.
 
 Olhando para a Matriz de Confusão:
-* O modelo **[Vencedor: KNN ou Árvore]** obteve o melhor *Recall* (acerto de maus pagadores) após o balanceamento. 
+* O modelo **[Vencedor: KNN]** obteve o melhor *Recall* (acerto de maus pagadores) após o balanceamento. 
 
 **Recomendação para a Diretoria:**  
 Recomenda-se colocar em produção o modelo **[KNN com k=9 e undersampling]**. Ele demonstrou melhor equilíbrio na Matriz de Confusão, minimizando significativamente a evasão de capital provocada por calotes imprevistos.
